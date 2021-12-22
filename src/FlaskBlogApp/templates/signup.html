@@ -1,0 +1,121 @@
+{%extends "base.html"%}
+{%block title%} Φόρμα εγγραφής{%endblock title%}
+   
+{% block content %}
+<div class="container login-container">
+    <div class="row">
+        <div class="col-md-6 login-form-l">
+            <h3>Σελίδα εγγραφής</h3>
+            <form action="#", method="POST"><!--οδηγεί στην ίδια σελίδα-->
+                {{form.hidden_tag()}} <!--ή form.csrf_token()-->
+                <div class="mb-3">
+                    {{form.username.label(class="form-label")}}
+                    {{form.username(class="form-control",required=False)}}
+                    <div id="usernameHelp" class="form-text">Παρακαλώ δώστε username</div>
+                    {% if form.username.errors%}
+                        <ul class="errors">
+                            {%for error in form.username.errors%}
+                                <li class="alert text-danger">
+                                    {{ error }}
+                                </li>
+                            {%endfor%}
+                        </ul>
+                    {%endif%}
+                </div>
+
+                <div class="mb-3">
+                    {{form.email.label(class="form-label")}}
+                    {{form.email(class="form-control",required=False)}}
+                    <div id="emailHelp" class="form-text">Παρακαλώ δώστε email</div>
+                    {% if form.email.errors%}
+                        <ul class="errors">
+                            {%for error in form.email.errors%}
+                                <li class="alert text-danger">
+                                    {{ error }}
+                                </li>
+                            {%endfor%}
+                        </ul>
+                    {%endif%}
+                </div>
+                
+                <div class="mb-3">
+                    {{form.password.label(class="form-label")}}
+                    {{form.password(type="password", class="form-control",required=False)}}
+                    <div id="passwordHelp" class="form-text">Παρακαλώ δώστε password</div>
+                    {% if form.password.errors%}
+                        <ul class="errors">
+                            {%for error in form.password.errors%}
+                                <li class="alert text-danger">
+                                    {{ error }}
+                                </li>
+                            {%endfor%}
+                        </ul>
+                    {%endif%}
+                </div>
+
+                <div class="mb-3">
+                    {{form.password2.label(class="form-label")}}
+                    {{form.password2(type="password", class="form-control",required=False)}}
+                    <div id="password2Help" class="form-text">Παρακαλώ επιβεβαιώστε το password</div>
+                    {% if form.password2.errors%}
+                        <ul class="errors">
+                            {%for error in form.password2.errors%}
+                                <li class="alert text-danger">
+                                    {{ error }}
+                                </li>
+                            {%endfor%}
+                        </ul>
+                    {%endif%}
+                </div>
+                <div class="mb-3">
+                    {{form.submit(class="btn btn-primary")}}
+                    
+                </div>
+             
+            </form> 
+        </div>        
+    </div>
+</div>
+{%endblock content%}
+
+<!-- <div class="mb-3">
+    <input type="text" class="form-control" placeholder="username"
+     name="username" aria-label="username" aria-decribeby="basic-addon1">
+    <div id="usernameHelp" class="form-text">Παρακαλώ δώστε username</div>
+    <ul class="errors">
+        <li class="alert text-danger"></li>
+    </ul> 
+</div>
+
+<div class="mb-3">
+    <input type="text" class="form-control" placeholder="email"
+     name="email" aria-label="email" aria-decribeby="basic-addon1">
+    <div id="emailHelp" class="form-text">Παρακαλώ δώστε email</div>
+    <ul class="errors">
+        <li class="alert text-danger"></li>
+    </ul> 
+</div>
+
+<div class="mb-3">
+    <input type="password" class="form-control" placeholder="password"
+     name="password2" aria-label="password2" aria-decribeby="basic-addon1">
+    <div id="passwordHelp" class="form-text">Παρακαλώ δώστε password</div>
+     <ul class="errors">
+        <li class="alert text-danger"></li>
+    </ul> 
+</div>
+
+<div class="mb-3">
+    <input type="password" class="form-control" placeholder="επιβεβαίωση password"
+     name="password" aria-label="password" aria-decribeby="basic-addon1">
+    <div id="passwordHelp" class="form-text">Παρακαλώ επιβεβαιώστε το password</div>
+  <ul class="errors">
+        <li class="alert text-danger"></li>
+    </ul> 
+</div>
+<div class="mb-3">
+    <button type="submit" class="btn btn-primary">Αποστολή</button>
+</div> -->
+   <!-- <div class="mb-3">
+                    <button type="submit" class="btn btn-primary">Αποστολή</button>
+                </div> -->

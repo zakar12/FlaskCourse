@@ -1,0 +1,28 @@
+{%extends "base.html"%}
+{%block title%}Books {%endblock title%}
+{% block content %}
+    <ul>
+    {%for book in jdict%}
+    <li>
+        {{book.Title}} <br>   
+        {{book.Author | title}} <br>
+        {{book.Genre}} <br>
+    </li>
+    <p>
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis enim dolore, pariatur aperiam deserunt assumenda ratione tempora delectus inventore quidem, atque beatae tempore repellendus id laboriosam ducimus cupiditate natus nesciunt.
+    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Animi fugit praesentium totam libero tempore? Placeat, ipsam, ipsa iste saepe maiores nisi impedit tempora deleniti aliquid distinctio quasi cum quod cupiditate!
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias, nemo voluptate id consectetur fugiat aut provident sequi sunt neque esse necessitatibus aliquid quis ullam? Facere ullam consequatur delectus commodi iste!
+    </p>
+    <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis enim dolore, pariatur aperiam deserunt assumenda ratione tempora delectus inventore quidem, atque beatae tempore repellendus id laboriosam ducimus cupiditate natus nesciunt.
+        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Animi fugit praesentium totam libero tempore? Placeat, ipsam, ipsa iste saepe maiores nisi impedit tempora deleniti aliquid distinctio quasi cum quod cupiditate!
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias, nemo voluptate id consectetur fugiat aut provident sequi sunt neque esse necessitatibus aliquid quis ullam? Facere ullam consequatur delectus commodi iste!
+        </p>
+        <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis enim dolore, pariatur aperiam deserunt assumenda ratione tempora delectus inventore quidem, atque beatae tempore repellendus id laboriosam ducimus cupiditate natus nesciunt.
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Animi fugit praesentium totam libero tempore? Placeat, ipsam, ipsa iste saepe maiores nisi impedit tempora deleniti aliquid distinctio quasi cum quod cupiditate!
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias, nemo voluptate id consectetur fugiat aut provident sequi sunt neque esse necessitatibus aliquid quis ullam? Facere ullam consequatur delectus commodi iste!
+            </p>
+    {%endfor%}
+</ul>    
+{%endblock content%}
