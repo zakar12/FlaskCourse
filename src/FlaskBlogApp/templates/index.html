@@ -1,18 +1,45 @@
 {%extends "base.html"%}
-{%block title%} Index{%endblock title%}
+{%block title%} Index {%endblock title%}
    
-   {% block content %}
-   <h3>Home Page</h3>
-   {%if articles %}
-   <ul>
-   {%for article in articles %}
-   <li>
-      {{article.article_title}} <br>
-      [{{article.date_created.strftime('%d-%m-%Y')}}] <br>
-      {{article.article_body | truncate(100)}} <br>
-      {{article.author.username}} 
-   </li>
-   {%endfor %}   
-   </ul>
-   {%endif%}
-   {%endblock content%}
+{% block content %}
+   
+   {% if articles %}
+      {% for article in articles %}
+
+
+         <div class="row my-3 p-3 bg-body rounded shadow-sm">
+         <div class="col col-md-12">
+            {% if article.article_image and article.article_image != 
+               'default_article_image.jpg' %}
+               <img src="{{ url_for('static', filename='images/articles_images/'+article.article_image) }}" alt="" class="img-responsive a_image" width="640px" height="360px">
+            {%else%}
+            <img src="{{ url_for('static', filename='images/articles_images/default_article_image.jpg') }}" alt="" class="img-responsive a_image" width="640px" height="360px">
+   
+            {% endif %}
+         </div>
+            <div class="col col-md-12">
+               <div class="main-article-title">
+                  <a class="article_title" href="{{url_for('full_article',article_id=article.id)}}">{{ article.article_title | safe }}</a>
+               </div>
+               <small class="article_date">[{{ article.date_created.strftime('%d-%m-%Y') }}]</small>
+               <p class="main-article-partial-text">
+                  {{ article.article_body | truncate(255) | safe }}
+               </p>
+               <p class="">Από 
+                  <span>
+                  <a class="author-name" href="#"> {{ article.author.username }}
+                  
+                     <img class="rounded-circle profile-image" alt="{{ article.author.username }}" src="{{ url_for('static', filename='images/profiles_images/'+article.author.profile_image) }}" data-holder-rendered="true" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ article.author.username }}">
+                  </a>
+                  </span>
+               </p>
+            </div>
+         </div>
+
+         <hr>
+
+
+{% endfor %}
+   {% endif %}
+{% endblock content %}
+
