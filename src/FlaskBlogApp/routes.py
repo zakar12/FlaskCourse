@@ -1,6 +1,9 @@
 from flask import render_template,json,redirect,url_for,request,flash
+
 from FlaskBlogApp.forms import SignupForm, LoginForm, ArticleForm
-from FlaskBlogApp import app
+from FlaskBlogApp import app,db,bcrypt
+from FlaskBlogApp.models import User,Article
+
 import os,secrets
 
 #my_path = os.path.abspath(os.path.dirname(__file__))
@@ -14,7 +17,8 @@ import os,secrets
 @app.route("/")
 @app.route("/index/")
 def root():
-    return render_template("index.html")
+    articles=Article.query.all()
+    return render_template("index.html",articles=articles)
 
 @app.route("/signup/", methods=["GET", "POST"]) #default χρησιμοποιεί το GET αν χρησιμοποιηθεί POST πρέπει να το δηλώσουμε αλλιώς θα βγάλει λάθος
 def signup(): 
@@ -24,7 +28,12 @@ def signup():
         email=form.email.data
         password=form.password.data
         password2=form.password2.data
-        print(username, email, password, password2)
+        encrypted_password=bcrypt.generate_password_hash(password).decode('UTF-8')
+        user=User(username=username, email=email, password=encrypted_password)
+        db.session.add(user)
+        db.session.commit()
+        flash(f"O λογαριασμός για τον χρήστη <b>{username}</b> δημιουργήθηκε με επιτυχία", "success")
+        return redirect(url_for('login')) # μέσα βάζουμε το όνομα της μεθόδου
     #ΠΑΛΙΑ ΜΕΘΟΔΟΣ request.form -> επιστρέφει dictionary πχ request.form["username"]
     # if request.method == 'POST': 
     #     username=request.form["username"]
@@ -39,6 +48,8 @@ def login():
     if request.method == "POST" and form.validate_on_submit():
         email=form.email.data
         password=form.password.data
+        bc=Bcrypt()
+        bc.generate_password_hash(password).decode('utf-8')
         flash(f"Eπιτυχές login {email}", "success")
     return render_template("login.html", form=form)
 

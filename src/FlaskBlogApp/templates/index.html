@@ -3,4 +3,16 @@
    
    {% block content %}
    <h3>Home Page</h3>
+   {%if articles %}
+   <ul>
+   {%for article in articles %}
+   <li>
+      {{article.article_title}} <br>
+      [{{article.date_created.strftime('%d-%m-%Y')}}] <br>
+      {{article.article_body | truncate(100)}} <br>
+      {{article.author.username}} 
+   </li>
+   {%endfor %}   
+   </ul>
+   {%endif%}
    {%endblock content%}
