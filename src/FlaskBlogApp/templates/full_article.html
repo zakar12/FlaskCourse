@@ -9,9 +9,9 @@
     <div class="col col-md-12">
        {% if article.article_image and article.article_image != 
           'default_article_image.jpg' %}
-          <img src="{{ url_for('static', filename='images/articles_images/'+article.article_image) }}" alt="" class="img-responsive a_image" width="640px" height="360px">
+          <img src="{{ url_for('static', filename='images/articles_images/'+article.article_image) }}" alt="" class="img-responsive a_image" width="1000px" height="auto">
        {%else%}
-       <img src="{{ url_for('static', filename='images/articles_images/default_article_image.jpg') }}" alt="" class="img-responsive a_image" width="640px" height="360px">
+       <img src="{{ url_for('static', filename='images/articles_images/default_article_image.jpg') }}" alt="" class="img-responsive a_image" width="1000px" height="auto">
 
        {% endif %}
     </div>
@@ -34,7 +34,7 @@
           </p>
           <p class="">Από 
              <span>
-             <a class="author-name" href="#"> {{ article.author.username }}
+             <a class="author-name" href="{{url_for('articles_by_author',author_id=article.author.id)}}"> {{ article.author.username }}
              
                 <img class="rounded-circle profile-image" alt="{{ article.author.username }}" src="{{ url_for('static', filename='images/profiles_images/'+article.author.profile_image) }}" data-holder-rendered="true" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ article.author.username }}">
              </a>

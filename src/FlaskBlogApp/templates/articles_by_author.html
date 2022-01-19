@@ -2,10 +2,15 @@
 {%block title%} Index {%endblock title%}
    
 {% block content %}
-   
-   {% if articles %}
-      {% for article in articles.items %}
 
+<h2 class="aba_header">
+    Άρθρα από τον {{author.username}}
+    <img class="rounded-circle profile-image" alt="{{author.username}}"
+    src="{{url_for('static',filename='images/profiles_images/'+author.profile_image)}}" data-holder-renderd="true" data-bs-toggle="tooltip" data-bs-placement="top" title="{{author.usernname}}">
+</h2>
+<hr>   
+   {% if articles %}
+      {% for article in articles.items %} <!-- items όταν βάζουμε pagination γιατί το articles δεν είναι iterable-->
 
          <div class="row my-3 p-3 bg-body rounded shadow-sm">
          <div class="col col-md-12">
@@ -40,23 +45,19 @@
 
 
 {% endfor %}
+   {% endif %}
 
-{% for page_number in articles.iter_pages(left_edge=1,right_edge=1) %}
-{%if page_number%}
-   {% if articles.page==page_number%} <!-- αν τυπώνεις την τρέχουσα σελίδα που εμφανίζεται-->
-   <span class="btn btn-primary btn-sm">{{  page_number }}</span>
-      <!-- <a class="btn btn-primary btn-sm" href="{{url_for('root', page=page_number) }}">{{  page_number }}</a> οχι refresh στην τρέχουσα page-->
-      <!--μπορεί να μπει στην αρχή και τέλος κουμπάκια με previous kai next με μερικά ifs και το σωστό αριθμό της επόμενης σελίδας ή της προηγούμενης οθόνης ΨΑΞΙΜΟ-->
-   {%else%}   
-      <a class="btn btn-outline-primary" href="{{url_for('root',page=page_number) }}">{{page_number}}</a>
-   {%endif%}
-{%else %}
-   <span class="btn btn-outline-primary btn-sm">...</span>
+   {% for page_number in articles.iter_pages(left_edge=1,right_edge=1) %}
+   {% if page_number %}
+      {% if articles.page == page_number %} <!-- αν τυπώνεις την τρέχουσα σελίδα που εμφανίζεται-->
+      <span class="btn btn-primary btn-sm">{{ page_number }}</span>
+      {% else %}   
+         <a class="btn btn-outline-primary" href="{{url_for('articles_by_author',  author_id=author.id, page=page_number) }}">{{ page_number }}</a>
+      {% endif %}
+   {% else %}
+      <span class="btn btn-outline-primary btn-sm">...</span>
 {%endif%}
 
 {%endfor%}
-
-{% endif %}
-
 {% endblock content %}
 

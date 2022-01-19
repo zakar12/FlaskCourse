@@ -7,7 +7,7 @@
           <div class="col-md-6 login-form-l">
               
             <h3>{{page_title}} Νέου Άρθρου</h3>
-              <form method="POST"><!--οδηγεί στην ίδια σελίδα-->
+              <form method="POST" enctype="multipart/form-data"><!--οδηγεί στην ίδια σελίδα-->
                   {{form.hidden_tag()}} <!--ή form.csrf_token()-->
                   <div class="mb-3">
                       {{form.article_title.label(class="form-label")}}
@@ -40,6 +40,18 @@
                       {%endif%}
                   </div>
                   
+                  <div class="mb-3">
+                    {{form.article_image.label(class="form-label")}}
+                    {{form.article_image(class="form-control",required=False)}}
+                    <div id="article_imageHelp" class="form-text">Παρακαλώ δώστε article_image</div>
+                    {% if form.article_image.errors%}
+                    <ul class="errors">
+                        {%for error in form.article_image.errors%}
+                        <li class="alert text-danger">{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+                </div>
                                 
                   <div class="mb-3">
                       {{form.submit(class="btn btn-primary")}}

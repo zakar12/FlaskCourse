@@ -9,8 +9,11 @@
             <img class="rounded-circle navbar-profile-image" src="{{url_for('static',filename='images/profiles_images/'+current_user.profile_image)}}" alt="{{current_user.username}}" 
             data-holder-rendered="true" data-bs-toggle="tooltip" data-bs-placement="top", title="{{current_user.username}}">
 
-            <form action="#" , method="POST">
-                <!--οδηγεί στην ίδια σελίδα-->
+            <!--<form action="#" , method="POST">
+                                οδηγεί στην ίδια σελίδα με απλά δεδομένα-->
+
+            <form action="#" , method="POST" enctype="multipart/form-data">
+             <!--πολλαπλών ειδών δεδομένα και binary-->
                 {{form.hidden_tag()}}
                 <!--ή form.csrf_token()-->
                 <div class="mb-3">
@@ -42,6 +45,20 @@
                     </ul>
                     {%endif%}
                 </div>
+                
+                <div class="mb-3">
+                    {{form.profile_image.label(class="form-label")}}
+                    {{form.profile_image(class="form-control",required=False)}}
+                    <div id="profile_imageHelp" class="form-text">Παρακαλώ δώστε profile_image</div>
+                    {% if form.profile_image.errors%}
+                    <ul class="errors">
+                        {%for error in form.profile_image.errors%}
+                        <li class="alert text-danger">{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+                </div>
+
                 <div class="mb-3">
                     {{form.submit(class="btn btn-primary")}}
 
